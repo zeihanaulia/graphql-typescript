@@ -31,6 +31,9 @@
       "gen-schema-types": "gql2ts src/schema.graphql -o src/types/schema.d.ts"
    },
    "jest": {
+      "transform": {
+         "^.+\\.tsx?$": "ts-jest"
+      },
       "moduleNameMapper": {
          "^@App/(.*)$": "<rootDir>/src/$1",
          "^lib/(.*)$": "<rootDir>/common/$1"
