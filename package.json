@@ -5,10 +5,13 @@
    "devDependencies": {
       "@types/bcrypt": "^3.0.0",
       "@types/bcryptjs": "^2.4.2",
+      "@types/jest": "^24.0.9",
       "@types/node": "^8.0.29",
       "@types/uuid": "^3.4.4",
       "gql2ts": "^1.10.1",
+      "jest": "^24.1.0",
       "nodemon": "^1.18.10",
+      "ts-jest": "^24.0.0",
       "ts-node": "3.3.0",
       "typescript": "2.5.2"
    },
