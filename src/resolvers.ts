@@ -1,5 +1,8 @@
-export const resolvers = {
+import { IResolvers } from "graphql-tools";
+
+export const resolvers: IResolvers = {
   Query: {
-    hello: (_: any, { name }: any) => `Hello ${name || "World"}`
+    hello: (_, { name }: GQL.IHelloOnQueryArguments) =>
+      `Hello ${name || "World"}`
   }
 };
