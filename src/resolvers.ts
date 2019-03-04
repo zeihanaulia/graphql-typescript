@@ -1,8 +1,15 @@
-import { IResolvers } from "graphql-tools";
+import { ResolverMap } from "./types/graphql-utils";
 
-export const resolvers: IResolvers = {
+export const resolvers: ResolverMap = {
   Query: {
     hello: (_, { name }: GQL.IHelloOnQueryArguments) =>
       `Hello ${name || "World"}`
+  },
+  Mutation: {
+    register: (_, { email, password }: GQL.IRegisterOnMutationArguments) => {
+      console.log(email);
+      console.log(password);
+      return true;
+    }
   }
 };
