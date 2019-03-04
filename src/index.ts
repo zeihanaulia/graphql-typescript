@@ -3,14 +3,14 @@ import { importSchema } from "graphql-import";
 import { GraphQLServer } from "graphql-yoga";
 import { resolvers } from "./resolvers";
 import * as path from "path";
-import { createConnection } from "typeorm";
+import { createTypeormConnection } from "./utils/createTypeormConnection";
 // ... or using `require()`
 // const { GraphQLServer } = require('graphql-yoga')
 
 export const startServer = async () => {
   const typeDefs = importSchema(path.join(__dirname, "schema.graphql"));
   const server = new GraphQLServer({ typeDefs, resolvers });
-  await createConnection();
+  await createTypeormConnection();
   await server.start();
   console.log("Server is running on localhost:4000");
 };
