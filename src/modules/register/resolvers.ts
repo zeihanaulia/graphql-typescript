@@ -11,8 +11,10 @@ export const resolvers: ResolverMap = {
   Mutation: {
     register: async (
       _,
-      { email, password }: GQL.IRegisterOnMutationArguments
+      args : GQL.IRegisterOnMutationArguments
     ) => {
+      
+      const {email, password} = args;
       const userAllreadyExists = await User.findOne({
         where: { email },
         select: ["id"]
