@@ -5,6 +5,7 @@
    "devDependencies": {
       "@types/bcrypt": "^3.0.0",
       "@types/bcryptjs": "^2.4.2",
+      "@types/ioredis": "^4.0.9",
       "@types/jest": "^24.0.9",
       "@types/node": "^8.0.29",
       "@types/uuid": "^3.4.4",
@@ -23,9 +24,11 @@
       "graphql-request": "^1.8.2",
       "graphql-tools": "^4.0.4",
       "graphql-yoga": "^1.17.4",
+      "ioredis": "^4.6.2",
       "pg": "^7.3.0",
       "reflect-metadata": "^0.1.10",
       "typeorm": "0.2.14",
+      "uuid": "^3.3.2",
       "yup": "^0.26.10"
    },
    "scripts": {
@@ -34,6 +37,7 @@
       "gen-schema-types": "gql2ts src/schema.graphql -o src/types/schema.d.ts"
    },
    "jest": {
+      "globalSetup": "./src/testSetup/callSetup.js",
       "transform": {
          "^.+\\.tsx?$": "ts-jest"
       },
