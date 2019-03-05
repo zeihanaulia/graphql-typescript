@@ -3,6 +3,11 @@ import { ResolverMap } from "../../types/graphql-utils";
 import { User } from "../../entity/User";
 
 export const resolvers: ResolverMap = {
+  Query: {
+    bye: () => {
+      return "bye";
+    }
+  },
   Mutation: {
     register: async (
       _,
