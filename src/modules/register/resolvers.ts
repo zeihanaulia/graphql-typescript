@@ -9,7 +9,8 @@ import {
   emailDuplicate
 } from "./errorMessages";
 import { formatYupError } from "../../utils/formatYupError";
-import { createConfirmedEmailLink } from "../../utils/createConfirmeEmailLink";
+import { createConfirmedEmailLink } from "../../utils/createConfirmedEmailLink";
+
 
 const schema = yup.object().shape({
   email: yup
