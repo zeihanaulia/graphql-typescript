@@ -7,9 +7,11 @@ import {
   passwordNotLongEnough
 } from "./errorMessages";
 import { createTypeormConnection } from "../../utils/createTypeormConnection";
+import { Connection } from "typeorm";
 
 const email = "zei@han.com";
 const password = "123asdas";
+let conn : Connection;
 
 const mutation = (e: string, p: string) => `
 mutation {
@@ -21,8 +23,12 @@ mutation {
 `;
 
 beforeAll(async () => {
-  await createTypeormConnection();
+  conn = await createTypeormConnection();
 })
+
+afterAll(async () => {
+  await conn.close();
+});
 
 describe("Register user", async () => {
   it("create user success", async () => {
@@ -45,6 +51,7 @@ describe("Register user", async () => {
   });
 
   it("catch bad email", async () => {
+    console.log(process.env.TEST_HOST)
     const response3: any = await request(process.env.TEST_HOST as string, mutation("ab", password));
     expect(response3.register).toHaveLength(2);
     expect(response3).toEqual({
@@ -66,7 +73,7 @@ describe("Register user", async () => {
     expect(response4.register).toHaveLength(1);
     expect(response4).toEqual({
       register: [
-        {
+        { 
           path: "password",
           message: passwordNotLongEnough
         }
