@@ -10,7 +10,7 @@ import {
 } from "./errorMessages";
 import { formatYupError } from "../../utils/formatYupError";
 import { createConfirmedEmailLink } from "../../utils/createConfirmedEmailLink";
-
+import { sendEmail } from "../../utils/sendEmail";
 
 const schema = yup.object().shape({
   email: yup
@@ -31,7 +31,11 @@ export const resolvers: ResolverMap = {
     }
   },
   Mutation: {
-    register: async (_, args: GQL.IRegisterOnMutationArguments, { redis, url }) => {
+    register: async (
+      _,
+      args: GQL.IRegisterOnMutationArguments,
+      { redis, url }
+    ) => {
       try {
         await schema.validate(args, { abortEarly: false });
       } catch (error) {
@@ -59,9 +63,13 @@ export const resolvers: ResolverMap = {
       });
 
       await user.save();
-       
-      const link = await createConfirmedEmailLink(url, user.id, redis);
-      console.log(link);
+
+      if (process.env.NODE_ENV != "test") {
+        await sendEmail(
+          user.email,
+          await createConfirmedEmailLink(url, user.id, redis)
+        );
+      }
 
       return null;
     }
