@@ -11,7 +11,6 @@ import { Connection } from "typeorm";
 
 const email = "zei@han.com";
 const password = "123asdas";
-let conn : Connection;
 
 const mutation = (e: string, p: string) => `
 mutation {
@@ -22,10 +21,10 @@ mutation {
 }
 `;
 
+let conn : Connection;
 beforeAll(async () => {
   conn = await createTypeormConnection();
 })
-
 afterAll(async () => {
   await conn.close();
 });

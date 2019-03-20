@@ -2,6 +2,7 @@ import { request } from "graphql-request";
 import { loginInvalid, emailNotConfirmed } from "./errorMessages";
 import { User } from "../../entity/User";
 import { createTypeormConnection } from "../../utils/createTypeormConnection";
+import { Connection } from "typeorm";
 
 const email = "zei@han.com";
 const password = "123";
@@ -24,8 +25,12 @@ mutation {
 }
 `;
 
+let conn : Connection;
 beforeAll(async () => {
-  await createTypeormConnection();
+  conn = await createTypeormConnection();
+})
+afterAll(async () => {
+  await conn.close();
 });
 
 const login = async (e: string, p: string, errMsg: string) => {
