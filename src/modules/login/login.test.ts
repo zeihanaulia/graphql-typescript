@@ -30,7 +30,7 @@ beforeAll(async () => {
   conn = await createTypeormConnection();
 })
 afterAll(async () => {
-  await conn.close();
+  // await conn.close();
 });
 
 const login = async (e: string, p: string, errMsg: string) => {

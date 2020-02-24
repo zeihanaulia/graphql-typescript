@@ -6,9 +6,9 @@ import { User } from "../entity/User";
 import { createConfirmedEmailLink } from "./createConfirmedEmailLink";
 
 let userId = "";
-let conn: Connection;
 const redis = new Redis();
 
+let conn: Connection;
 beforeAll(async () => {
   conn = await createTypeormConnection();
   const user = await User.create({
@@ -18,9 +18,8 @@ beforeAll(async () => {
 
   userId = user.id;
 });
-
 afterAll(async () => {
-  await conn.close();
+  // await conn.close();
 });
 
 it("Make confirmation success", async () => {
